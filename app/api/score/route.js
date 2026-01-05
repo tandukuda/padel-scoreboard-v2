@@ -1,13 +1,43 @@
 import { NextResponse } from "next/server";
 
-// This variable stores the score in the server's memory
-// It works perfectly for Local LAN setups (npm run dev / npm start)
 let gameData = {
-  mode: "score",
-  runningText: "CHAMPIONS DE PADEL",
+  template: "simple",
+  runningText: "WELCOME TO PADEL CHAMPIONS",
   isAnimating: true,
-  left: { p1: 0, p2: 0, winner: null },
-  right: { p1: 0, p2: 0, winner: null },
+
+  // New Feature: Global Clock Toggle
+  showClock: true,
+  logoSrc: null,
+
+  motion: {
+    src: null,
+    active: false,
+    showClock: false,
+  },
+
+  left: {
+    p1Name: "TEAM A",
+    p2Name: "TEAM B",
+    p1Sets: 0,
+    p2Sets: 0,
+    p1: 0,
+    p2: 0,
+    winner: null,
+    timerStart: null,
+    timerStored: 0,
+  },
+
+  right: {
+    p1Name: "TEAM C",
+    p2Name: "TEAM D",
+    p1Sets: 0,
+    p2Sets: 0,
+    p1: 0,
+    p2: 0,
+    winner: null,
+    timerStart: null,
+    timerStored: 0,
+  },
 };
 
 export async function GET() {
@@ -16,6 +46,6 @@ export async function GET() {
 
 export async function POST(request) {
   const body = await request.json();
-  gameData = body; // Update the memory
+  gameData = body;
   return NextResponse.json({ success: true });
 }
