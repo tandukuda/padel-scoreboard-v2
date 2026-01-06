@@ -7,6 +7,12 @@ const config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        // "font-sans" will be Montserrat (default for UI)
+        sans: ["var(--font-montserrat)", "sans-serif"],
+        // "font-mono" will be Optician Sans (used in LED Board)
+        mono: ["var(--font-optician)", "monospace"],
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",

@@ -1,27 +1,33 @@
-import type { Metadata } from "next";
-import { Chakra_Petch } from "next/font/google";
+import { Montserrat } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
-// Load the font securely
-const chakra = Chakra_Petch({
-  weight: ["500", "700"],
+// 1. Load Montserrat for the Controller UI
+const montserrat = Montserrat({
   subsets: ["latin"],
+  variable: "--font-montserrat",
   display: "swap",
 });
 
-export const metadata: Metadata = {
+// 2. Load Optician Sans for the LED Board
+const optician = localFont({
+  src: "./fonts/Optiker-K.otf", // Ensure file is in app/fonts/
+  variable: "--font-optician",
+  display: "swap",
+});
+
+export const metadata = {
   title: "Padel Scoreboard",
-  description: "LED Padel System",
+  description: "LED Scoreboard System",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={chakra.className}>{children}</body>
+      {/* Apply Montserrat by default, and inject the Optician variable */}
+      <body className={`${montserrat.variable} ${optician.variable} font-sans`}>
+        {children}
+      </body>
     </html>
   );
 }
