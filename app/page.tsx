@@ -96,12 +96,12 @@ const LEDBoard = ({ initialData }: { initialData: any }) => {
   const CourtDisplay = ({ side, courtData, currentTimer }: any) => {
     const isLeft = side === "left";
 
-    // FIX: Reverted to edge positioning
+    // Position: Edge positioning
     const posClass = isLeft ? "left-8" : "right-8";
 
     const template = courtData.template || "americano";
 
-    // Common Translucent Style
+    // Common Translucent Style WITH Rounded Corners
     const boxStyle =
       "bg-black/40 backdrop-blur-md border border-white/10 shadow-2xl rounded-2xl";
 
@@ -229,8 +229,9 @@ const LEDBoard = ({ initialData }: { initialData: any }) => {
       `}</style>
 
       <div style={{ transform: `scale(${scale})` }}>
+        {/* Main Board Container: Sharp Corners (Square) */}
         <div
-          className="relative rounded-[30px] overflow-hidden"
+          className="relative overflow-hidden"
           style={{ width: "1800px", height: "100px" }}
         >
           {/* BACKGROUND LAYER (Static Orange or Video BG) */}
@@ -241,7 +242,7 @@ const LEDBoard = ({ initialData }: { initialData: any }) => {
           {/* MOTION LAYER */}
           {data.motion?.active && data.motion?.src && (
             <div
-              className={`absolute inset-0 bg-black flex items-center justify-center overflow-hidden rounded-[30px] ${data.motion.asBackground ? "z-0" : "z-[60]"}`}
+              className={`absolute inset-0 bg-black flex items-center justify-center overflow-hidden ${data.motion.asBackground ? "z-0" : "z-[60]"}`}
             >
               <video
                 key={data.motion.src}
@@ -251,9 +252,9 @@ const LEDBoard = ({ initialData }: { initialData: any }) => {
                 muted
                 className="w-full h-full object-cover"
               />
-              {/* If Video is FOREGROUND (Mode ON), we can show clock if desired (using root showClock) */}
+              {/* VIDEO OVERLAY CLOCK: Rounded Corners Restored */}
               {!data.motion.asBackground && data.showClock && (
-                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[84px] bg-black/40 backdrop-blur-md rounded-2xl flex items-center justify-center px-10 shadow-xl border border-white/10">
+                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[84px] bg-black/60 backdrop-blur-md flex items-center justify-center px-10 border border-white/20 rounded-2xl">
                   <span className="text-6xl text-white tracking-widest font-mono">
                     {time}
                   </span>
@@ -288,10 +289,9 @@ const LEDBoard = ({ initialData }: { initialData: any }) => {
                 </>
               )}
 
-              {/* CLOCK LAYER - ALWAYS ON TOP (Middle) */}
-              {/* Now controlled by the Global `data.showClock` */}
+              {/* MAIN CLOCK LAYER: Rounded Corners Restored */}
               {data.showClock && (
-                <div className="absolute z-50 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[84px] bg-black/40 backdrop-blur-md rounded-2xl flex items-center justify-center px-10 shadow-xl border border-white/10">
+                <div className="absolute z-50 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[84px] bg-black/40 backdrop-blur-md flex items-center justify-center px-10 shadow-xl border border-white/10 rounded-2xl">
                   <span className="text-6xl text-[#FFF6E5] tracking-widest mt-1 font-mono">
                     {time}
                   </span>
@@ -685,7 +685,7 @@ const ControlPanel = () => {
               updateState((s: any) => {
                 const n = JSON.parse(JSON.stringify(s));
                 n[side].template = "americano";
-                // FIX: Do not turn off motion
+                n.motion.active = false;
                 n.viewMode = "score";
                 return n;
               })
@@ -700,7 +700,7 @@ const ControlPanel = () => {
               updateState((s: any) => {
                 const n = JSON.parse(JSON.stringify(s));
                 n[side].template = "timer";
-                // FIX: Do not turn off motion
+                n.motion.active = false;
                 n.viewMode = "score";
                 return n;
               })
@@ -715,7 +715,7 @@ const ControlPanel = () => {
               updateState((s: any) => {
                 const n = JSON.parse(JSON.stringify(s));
                 n[side].template = "tennis";
-                // FIX: Do not turn off motion
+                n.motion.active = false;
                 n.viewMode = "score";
                 return n;
               })
