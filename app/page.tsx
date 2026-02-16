@@ -875,18 +875,37 @@ const ControlPanel = () => {
           </div>
 
           {/* SPECIFIC FILE BUTTONS */}
+          {/* SPECIFIC FILE BUTTONS */}
           <div className="grid grid-cols-2 gap-2 mb-2">
             <button
               onClick={() => playVideo("/intro.mp4")}
-              className="bg-[#222] hover:bg-[#333] border border-gray-700 py-3 rounded flex items-center justify-center gap-2 text-white"
+              className="bg-[#222] hover:bg-[#333] border border-gray-700 py-3 rounded flex items-center justify-center gap-2 text-white text-sm"
             >
-              <Film size={16} /> Play INTRO.MP4
+              <Film size={16} /> INTRO
             </button>
             <button
               onClick={() => playVideo("/advert.mp4")}
-              className="bg-[#222] hover:bg-[#333] border border-gray-700 py-3 rounded flex items-center justify-center gap-2 text-white"
+              className="bg-[#222] hover:bg-[#333] border border-gray-700 py-3 rounded flex items-center justify-center gap-2 text-white text-sm"
             >
-              <Film size={16} /> Play ADVERT.MP4
+              <Film size={16} /> ADVERT
+            </button>
+            <button
+              onClick={() => playVideo("/video3.mp4")}
+              className="bg-[#222] hover:bg-[#333] border border-gray-700 py-3 rounded flex items-center justify-center gap-2 text-white text-sm"
+            >
+              <Film size={16} /> VIDEO 3
+            </button>
+            <button
+              onClick={() => playVideo("/video4.mp4")}
+              className="bg-[#222] hover:bg-[#333] border border-gray-700 py-3 rounded flex items-center justify-center gap-2 text-white text-sm"
+            >
+              <Film size={16} /> VIDEO 4
+            </button>
+            <button
+              onClick={() => playVideo("/video5.mp4")}
+              className="bg-[#222] hover:bg-[#333] border border-gray-700 py-3 rounded flex items-center justify-center gap-2 text-white text-sm"
+            >
+              <Film size={16} /> VIDEO 5
             </button>
           </div>
 
